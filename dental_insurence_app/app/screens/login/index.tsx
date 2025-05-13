@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         padding: 12,
         marginBottom: 12
-    }
+    },
     link: {
         flex: 1,
         justifyContent: 'center',

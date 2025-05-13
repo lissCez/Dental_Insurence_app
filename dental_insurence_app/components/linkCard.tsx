@@ -31,8 +31,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 12,
     overflow: 'hidden',
-    marginBottom: 20,
-    marginLeft: 20,
+    marginTop: 10,
+    marginBottom: 10,
     elevation: 3,
   },
   iconContainer: {

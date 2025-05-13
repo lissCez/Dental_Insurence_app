@@ -50,9 +50,10 @@ const AgendamentoConsulta = () => {
 
             <View style={styles.dataHora}>
                 <Text style={styles.label}>Data da Consulta:</Text>
-                <Button title={data.toLocaleString()} onPress={() => setMostrarData(true)} />
+                <Button style={styles.btnStyle} title={data.toLocaleString()} onPress={() => setMostrarData(true)} />
                 {mostrarData && (
                     <DateTimePicker
+                    style={styles.btnStyle}
                         value={data}
                         mode="datetime"
                         display="default"
@@ -64,7 +65,7 @@ const AgendamentoConsulta = () => {
                 )}
             </View>
 
-            <Button title="Agendar" onPress={agendarConsulta} color="#007AFF" />
+            <Button title="Agendar" onPress={agendarConsulta} color="#00BFFF" />
             <Link href="/screens/home" asChild>
                 <TouchableOpacity style={styles.link}>
                     <Text style={styles.linkTexto}>⭠ Voltar</Text>
@@ -83,11 +84,12 @@ const styles = StyleSheet.create({
         backgroundColor: "#fff"
     },
     titulo: {
-        fontSize: 22,
+        color: 'deepskyblue',
+        fontSize: 24,
         fontWeight: "bold",
         marginBottom: 24,
         textAlign: "center"
-    },
+      },
     input: {
         borderWidth: 1,
         borderColor: "#ccc",
@@ -96,11 +98,23 @@ const styles = StyleSheet.create({
         marginBottom: 16
     },
     dataHora: {
-        marginBottom: 20
+        marginBottom: 20,
+        borderRadiuos: 12
     },
     label: {
         fontSize: 16,
-        marginBottom: 8
+        marginBottom: 8,
+        borderRadiuos: 12
+    },
+    btnStyle: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: "#007AFF",
+        padding: 16,
+        borderRadius: 10,
+        marginBottom: 12,
+        width: '80%'
     },
     link: {
         flex: 1,
