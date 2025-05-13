@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "350249775122",
+    "project_id": "dental-insurance-app",
+    "storage_bucket": "dental-insurance-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:350249775122:android:bc3576d5b7f37cbe93e8cb",
+        "android_client_info": {
+          "package_name": "br.com.dental.insurance"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD856cV_yfMDr8sA5UyRDmEwZ7x0cGLbAs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
