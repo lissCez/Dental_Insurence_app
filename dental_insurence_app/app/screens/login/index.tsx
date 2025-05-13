@@ -1,6 +1,7 @@
 import { useRouter } from "expo-router";
 import React, { useState } from "react";
 import { Alert, Button, StyleSheet, Text, TextInput, View } from "react-native";
+import { Link } from 'expo-router';
 
 const Login = () => {
     const router = useRouter();
@@ -35,6 +36,12 @@ const Login = () => {
                 onChangeText={setSenha}
             />
             <Button title="Entrar" onPress={handleLogin} />
+
+            <Link href="/screens/home" asChild>
+                <TouchableOpacity style={styles.link}>
+                    <Text style={styles.linkTexto}>⭠ Voltar</Text>
+                </TouchableOpacity>
+            </Link>
         </View>
     );
 };
@@ -58,5 +65,16 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         padding: 12,
         marginBottom: 12
+    }
+    link: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginBottom: 12,
+        width: "80%"
+    },
+    linkTexto: {
+        color: '#03a1fc',
+        fontWeight: '600',
     }
 });
