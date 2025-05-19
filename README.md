@@ -7,7 +7,7 @@
 - Nicolas Paiffer do Carmo - RM554145  
 
 **Challenge Odontoprev**  
-**2ª Sprint**  
+**4ª Sprint**  
 São Paulo, 2024
 
 ---
