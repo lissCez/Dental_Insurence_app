@@ -1,12 +1,12 @@
 import Goback from '@/components/gobackbutton';
 import PatientCard from '@/components/patientCard';
-import React, { useState } from 'react';
-import { Button, ScrollView, StyleSheet, Text, View } from 'react-native';
-
+import { fetchPatients } from '@/src/services/patientsService';
+import React, { useEffect, useState } from 'react';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 
 interface Patient {
     id: string;
-    nome: string
+    nome: string;
     sexo: string;
     naturalidade: string;
     localNascimento: string;
@@ -14,32 +14,17 @@ interface Patient {
 }
 
 const Pacientes = () => {
-    const [pacientes, setPacientes] = useState<Patient[]>([
-        {
-            id: '1',
-            nome: 'João da Silva',
-            sexo: 'Masculino',
-            naturalidade: 'Brasileiro',
-            localNascimento: 'São Paulo, SP',
-            dataNascimento: '10/05/1990',
-        },
-    ]);
-
-    // CREATE
-
-    const adicionarPaciente = () => {
-        const novoPaciente: Patient = {
-            id: Math.random().toString(),
-            nome: 'Novo Paciente',
-            sexo: 'Feminino',
-            naturalidade: 'Brasileira',
-            localNascimento: 'Rio de Janeiro, RJ',
-            dataNascimento: '01/01/2000',
+    const [pacientes, setPacientes] = useState<Patient[]>([]);
+    useEffect(() => {
+        const getData = async () => {
+            try {
+                const data = await fetchPatients();
+            } catch (error) {
+                console.error("Erro ao buscar pacientes", error);
+            }
         };
-        setPacientes(prev => [...prev, novoPaciente]);
-    };
-
-    // DELETE
+        getData();
+    }, []);
     const deletarPaciente = (id: string) => {
         setPacientes(prev => prev.filter(p => p.id !== id));
     };
@@ -47,21 +32,18 @@ const Pacientes = () => {
     return (
         <View style={{ flex: 1 }}>
             <Text style={styles.pacienteTitle}>Pacientes</Text>
-            <Button title="Adicionar Paciente" onPress={adicionarPaciente} />
             <ScrollView>
-                {pacientes.map((paciente) => (
-                    <View key={paciente.id}>
-                        <PatientCard
-                            nome={paciente.nome}
-                            sexo={paciente.sexo}
-                            naturalidade={paciente.naturalidade}
-                            localNascimento={paciente.localNascimento}
-                            dataNascimento={paciente.dataNascimento}
-                        />
-                        <Button title="Excluir" onPress={() => deletarPaciente(paciente.id)} />
-                    </View>
+                {pacientes.map((p) => (
+                    <PatientCard
+                        key={p.id}
+                        nome={p.nome}
+                        sexo={p.sexo}
+                        naturalidade={p.naturalidade}
+                        localNascimento={p.localNascimento}
+                        dataNascimento={p.dataNascimento}
+                    />
                 ))}
-                <Goback></Goback>
+                <Goback />
             </ScrollView>
         </View>
     );
@@ -79,7 +61,6 @@ const styles = StyleSheet.create({
         marginTop: 19,
         marginLeft: 38,
         marginBottom: 10,
-    },
-
+    }
 });
 
