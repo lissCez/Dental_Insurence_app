@@ -1,73 +1,102 @@
 import Goback from '@/components/gobackbutton';
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { Image, StyleSheet, Text, TextInput, View } from 'react-native';
-const LoginScreen = () => {
+import { Image, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 
+const LoginScreen = () => {
     const navigation = useNavigation();
+
     return (
         <View style={styles.container}>
             <Image source={require('@/assets/images/freepik__upload__10074.png')} style={styles.logo} />
             <View style={styles.loginBox}>
-                <Text style={styles.title}>Login</Text>
-                <TextInput style={styles.input} placeholder="Digite suas credenciais..." placeholderTextColor="#ffffff" />
-                <TextInput style={styles.input} placeholder="Digite sua senha..." placeholderTextColor="#ffffff" secureTextEntry />
+                <Text style={styles.title}>Entrar no sistema</Text>
+
+                <TextInput
+                    style={styles.input}
+                    placeholder="Digite seu e-mail"
+                    placeholderTextColor="#999"
+                    keyboardType="email-address"
+                />
+
+                <TextInput
+                    style={styles.input}
+                    placeholder="Digite sua senha"
+                    placeholderTextColor="#999"
+                    secureTextEntry
+                />
+
+                <Pressable style={styles.button}>
+                    <Text style={styles.buttonText}>Login</Text>
+                </Pressable>
             </View>
-            <Goback></Goback>
+            <Goback />
         </View>
     );
 };
 
+export default LoginScreen;
+
 const styles = StyleSheet.create({
+
     container: {
         flex: 1,
-        backgroundColor: '#ffffff',
+        backgroundColor: '#FFFFFF',
         justifyContent: 'center',
         alignItems: 'center',
+        paddingHorizontal: 16,
     },
+
     logo: {
         width: 100,
         height: 100,
-        marginBottom: 20,
+        marginBottom: 24,
     },
+
     loginBox: {
-        backgroundColor: '#a8f0ff',
-        padding: 30,
-        borderRadius: 10,
-        width: 320,
+        backgroundColor: '#f2f7ff',
+        padding: 24,
+        borderRadius: 16,
+        width: '100%',
+        maxWidth: 360,
         shadowColor: '#000',
-        shadowOffset: { width: 0, height: 4 },
-        shadowOpacity: 0.1,
+        shadowOpacity: 0.05,
         shadowRadius: 6,
+        elevation: 3,
         alignItems: 'center',
     },
+
     title: {
-        color: '#003399',
-        fontSize: 24,
+        color: '#0066FF',
+        fontSize: 22,
         fontWeight: 'bold',
-        marginBottom: 20,
+        marginBottom: 24,
     },
+
     input: {
         width: '100%',
-        padding: 12,
-        marginBottom: 15,
-        borderRadius: 5,
-        backgroundColor: '#003399',
-        color: '#ffffff',
-    },
-    button: {
-        width: '100%',
-        padding: 12,
-        borderRadius: 5,
-        backgroundColor: '#4da6ff',
-        alignItems: 'center',
-        marginTop: 15,
-    },
-    buttonText: {
-        color: 'white',
+        paddingVertical: 12,
+        paddingHorizontal: 16,
+        backgroundColor: '#E6EEFF',
+        borderRadius: 10,
         fontSize: 16,
-        fontWeight: 'bold',
-    }
+        color: '#333',
+        marginBottom: 16,
+    },
+
+    button: {
+        backgroundColor: '#FF6052',
+        paddingVertical: 12,
+        paddingHorizontal: 32,
+        borderRadius: 20,
+        marginTop: 8,
+    },
+
+    buttonText: {
+        color: '#FFF',
+        fontSize: 18,
+        fontWeight: '600',
+    },
+
 });
 
-export default LoginScreen;

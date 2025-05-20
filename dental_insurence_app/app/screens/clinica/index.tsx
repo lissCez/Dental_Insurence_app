@@ -1,110 +1,170 @@
+import Goback from '@/components/gobackbutton';
 import { StatusBar } from 'expo-status-bar';
+
 import React from 'react';
-import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
+
+import { Image, StyleSheet, Text, View } from 'react-native';
 
 const profileIcon = require("@/assets/images/profile-pfp.png");
 
 const Perfil = () => {
+
   return (
     <View style={styles.backgroundProfile}>
-
       <View style={styles.perfilContainer}>
-        <Text style={styles.perfilText}>Perfil</Text>
+        <Text style={styles.perfilText}>Perfil da Clínica</Text>
 
         <View style={styles.imageContainer}>
-          <Image source={profileIcon} style={styles.profileIcon}></Image>
+          <Image source={profileIcon} style={styles.profileIcon} />
         </View>
 
         <View style={styles.dataContainer}>
-          <Text style={styles.dataText}>Clinica</Text>
-          <Text style={styles.dataText}>CNPJ</Text>
-          <Text style={styles.dataText}>Endereco</Text>
-          <Text style={styles.dataText}>Tel</Text>
-          <Text style={styles.dataText} >Email</Text>
-        </View>
+          <Text style={styles.label}>Nome:</Text>
+          <Text style={styles.data}>Clínica DentalCare</Text>
 
-        <View style={styles.buttonContainer}>
-          <Pressable style={styles.button}>
-            <Text style={styles.buttonText}>Sair</Text>
-          </Pressable>
+          <Text style={styles.label}>CNPJ:</Text>
+          <Text style={styles.data}>12.345.678/0001-90</Text>
+
+          <Text style={styles.label}>Endereço:</Text>
+          <Text style={styles.data}>Rua Exemplo, 123 - São Paulo/SP</Text>
+
+          <Text style={styles.label}>Telefone:</Text>
+          <Text style={styles.data}>(11) 2345-6789</Text>
+
+          <Text style={styles.label}>Email:</Text>
+          <Text style={styles.data}>contato@dentalcare.com</Text>
         </View>
+        <Goback></Goback>
       </View>
 
       <StatusBar style="auto" />
-
     </View>
-  )
-}
 
-export default Perfil
+  );
+
+};
+
+export default Perfil;
 
 const styles = StyleSheet.create({
+
   backgroundProfile: {
+
     backgroundColor: '#82B4FF',
+
     flex: 1,
-    alignItems: 'center'
+
+    alignItems: 'center',
+
+    justifyContent: 'center',
 
   },
+
+  perfilContainer: {
+
+    backgroundColor: '#fff',
+
+    width: '90%',
+
+    borderRadius: 20,
+
+    padding: 24,
+
+    shadowColor: "#000",
+
+    shadowOpacity: 0.05,
+
+    shadowRadius: 4,
+
+    elevation: 3,
+
+  },
+
+  perfilText: {
+
+    fontSize: 24,
+
+    fontWeight: 'bold',
+
+    color: '#0066FF',
+
+    marginBottom: 20,
+
+    textAlign: 'center',
+
+  },
+
   imageContainer: {
-    flex: 0,
+
     alignItems: 'center',
-    marginTop: 18,
+
+    marginBottom: 30,
+
+  },
+
+  profileIcon: {
+
+    width: 120,
+
+    height: 120,
+
+    borderRadius: 60,
+
+  },
+
+  dataContainer: {
+
     marginBottom: 40,
 
   },
-  perfilContainer: {
-    flex: 0,
-    backgroundColor: 'white',
-    width: '95%',
-    height: '85%',
-    marginTop: 20,
-    borderRadius: 20
-  },
-  profileIcon: {
-    width: 120,
-    height: 120,
-  },
-  perfilText: {
-    fontFamily: 'NotoSans_Condensed',
-    fontWeight: 500,
-    fontSize: 24,
-    lineHeight: 29,
-    color: '#0066FF',
-    marginLeft: 19,
-    marginTop: 14
-  },
-  dataText: {
-    fontFamily: 'NotoSans_Condensed',
-    fontWeight: 500,
+
+  label: {
+
     fontSize: 16,
-    lineHeight: 29,
-    marginBottom: 19,
-    color: '#666666',
+
+    color: '#999',
+
+    fontWeight: '600',
+
   },
-  button: {
-    backgroundColor: '#FF6052',
-    width: 95,
-    height: 40,
-    borderRadius: 20,
+
+  data: {
+
+    fontSize: 18,
+
+    color: '#333',
+
+    marginBottom: 12,
+
   },
-  buttonText: {
-    color: 'white',
-    fontFamily: 'NotoSans_Condensed',
-    fontWeight: 500,
-    fontSize: 20,
-    lineHeight: 29,
-    textAlign: 'center',
-    paddingTop: 7
-  },
-  dataContainer: {
-    flex: 0,
-    marginLeft: 19
-  },
+
   buttonContainer: {
-    position: 'absolute',
-    bottom: 50,
-    left: 0,
-    right: 0,
+
     alignItems: 'center',
-  }
-})
+
+  },
+
+  button: {
+
+    backgroundColor: '#FF6052',
+
+    paddingVertical: 10,
+
+    paddingHorizontal: 32,
+
+    borderRadius: 20,
+
+  },
+
+  buttonText: {
+
+    color: '#fff',
+
+    fontSize: 18,
+
+    fontWeight: '600',
+
+  },
+
+});
+
