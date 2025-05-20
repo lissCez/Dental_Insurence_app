@@ -2,7 +2,7 @@ import { Link } from 'expo-router';
 import React, { useState } from 'react';
 import { Alert, Button, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
-const CadastroPacienteScreen = () => {
+const CadastroDentistScreen = () => {
     const [nome, setNome] = useState('');
     const [email, setEmail] = useState('');
 
@@ -18,7 +18,7 @@ const CadastroPacienteScreen = () => {
 
     return (
         <View style={{ flex: 1, padding: 20 }}>
-            <Text style={{ fontSize: 20, marginBottom: 10 }}>Cadastro de Paciente</Text>
+            <Text style={{ fontSize: 20, marginBottom: 10 }}>Cadastro de Dentistas</Text>
             <TextInput
                 style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 10, paddingLeft: 10 }}
                 placeholder="Nome"
@@ -42,7 +42,7 @@ const CadastroPacienteScreen = () => {
     );
 };
 
-export default CadastroPacienteScreen;
+export default CadastroDentistScreen;
 
 const styles = StyleSheet.create({
     link: {
