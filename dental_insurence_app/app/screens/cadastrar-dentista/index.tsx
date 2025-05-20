@@ -1,18 +1,17 @@
-import React, { useState } from 'react';
-import { Alert, Button, Text, TextInput, View, StyleSheet } from 'react-native';
 import { Link } from 'expo-router';
+import React, { useState } from 'react';
+import { Alert, Button, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 const CadastroPacienteScreen = () => {
     const [nome, setNome] = useState('');
     const [email, setEmail] = useState('');
-    const [telefone, setTelefone] = useState('');
 
     const handleCadastro = () => {
         if (!nome || !email) {
             Alert.alert('Preencha todos os campos!');
             return;
         }
-        Alert.alert('Paciente cadastrado com sucesso!');
+        Alert.alert('Dentista cadastrado com sucesso!');
         setNome('');
         setEmail('');
     };
@@ -47,14 +46,14 @@ export default CadastroPacienteScreen;
 
 const styles = StyleSheet.create({
     link: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-      marginBottom: 12,
-      width: "80%"
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginBottom: 12,
+        width: "80%"
     },
     linkTexto: {
-      color: '#03a1fc',
-      fontWeight: '600',
+        color: '#03a1fc',
+        fontWeight: '600',
     }
-  });
+});

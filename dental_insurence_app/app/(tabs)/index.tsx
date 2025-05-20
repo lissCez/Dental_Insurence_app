@@ -1,11 +1,11 @@
+import { useRouter } from 'expo-router';
 import React, { useEffect, useState } from 'react';
-import { ImageBackground, Text, Button, Animated } from 'react-native';
-import { useRouter } from 'expo-router'; // ← IMPORTANTE
+import { Animated, Button, ImageBackground, Text } from 'react-native';
 
 const IndexScreen = () => {
   const [fadeAnim] = useState(new Animated.Value(0));
   const [slideAnim] = useState(new Animated.Value(0));
-  const router = useRouter(); // ← ESSENCIAL
+  const router = useRouter();
 
   useEffect(() => {
     Animated.timing(fadeAnim, {

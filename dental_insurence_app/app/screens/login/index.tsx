@@ -1,80 +1,73 @@
-import { useRouter } from "expo-router";
-import React, { useState } from "react";
-import { Alert, Button, StyleSheet, Text, TextInput, View } from "react-native";
-import { Link } from 'expo-router';
+import Goback from '@/components/gobackbutton';
+import { useNavigation } from '@react-navigation/native';
+import React from 'react';
+import { Image, StyleSheet, Text, TextInput, View } from 'react-native';
+const LoginScreen = () => {
 
-const Login = () => {
-    const router = useRouter();
-    const [email, setEmail] = useState("");
-    const [senha, setSenha] = useState("");
-
-    const handleLogin = async () => {
-        try {
-            await signInWithEmailAndPassword(auth, email, senha);
-            router.replace("./home");
-        } catch (error: any) {
-            Alert.alert("Erro ao entrar", error.message);
-        }
-    };
-
+    const navigation = useNavigation();
     return (
         <View style={styles.container}>
-            <Text style={styles.titulo}>Login da Clínica</Text>
-            <TextInput
-                placeholder="Email"
-                style={styles.input}
-                value={email}
-                onChangeText={setEmail}
-                keyboardType="email-address"
-                autoCapitalize="none"
-            />
-            <TextInput
-                placeholder="Senha"
-                style={styles.input}
-                secureTextEntry
-                value={senha}
-                onChangeText={setSenha}
-            />
-            <Button title="Entrar" onPress={handleLogin} />
-
-            <Link href="/screens/home" asChild>
-                <TouchableOpacity style={styles.link}>
-                    <Text style={styles.linkTexto}>⭠ Voltar</Text>
-                </TouchableOpacity>
-            </Link>
+            <Image source={require('@/assets/images/freepik__upload__10074.png')} style={styles.logo} />
+            <View style={styles.loginBox}>
+                <Text style={styles.title}>Login</Text>
+                <TextInput style={styles.input} placeholder="Digite suas credenciais..." placeholderTextColor="#ffffff" />
+                <TextInput style={styles.input} placeholder="Digite sua senha..." placeholderTextColor="#ffffff" secureTextEntry />
+            </View>
+            <Goback></Goback>
         </View>
     );
 };
 
-export default Login;
-
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: "center",
-        padding: 20
-    },
-    titulo: {
-        fontSize: 24,
-        marginBottom: 20,
-        textAlign: "center"
-    },
-    input: {
-        borderWidth: 1,
-        borderColor: "#ccc",
-        borderRadius: 8,
-        padding: 12,
-        marginBottom: 12
-    },
-    link: {
-        flex: 1,
+        backgroundColor: '#ffffff',
         justifyContent: 'center',
         alignItems: 'center',
-        marginBottom: 12,
-        width: "80%"
     },
-    linkTexto: {
-        color: '#03a1fc',
-        fontWeight: '600',
+    logo: {
+        width: 100,
+        height: 100,
+        marginBottom: 20,
+    },
+    loginBox: {
+        backgroundColor: '#a8f0ff',
+        padding: 30,
+        borderRadius: 10,
+        width: 320,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 0.1,
+        shadowRadius: 6,
+        alignItems: 'center',
+    },
+    title: {
+        color: '#003399',
+        fontSize: 24,
+        fontWeight: 'bold',
+        marginBottom: 20,
+    },
+    input: {
+        width: '100%',
+        padding: 12,
+        marginBottom: 15,
+        borderRadius: 5,
+        backgroundColor: '#003399',
+        color: '#ffffff',
+    },
+    button: {
+        width: '100%',
+        padding: 12,
+        borderRadius: 5,
+        backgroundColor: '#4da6ff',
+        alignItems: 'center',
+        marginTop: 15,
+    },
+    buttonText: {
+        color: 'white',
+        fontSize: 16,
+        fontWeight: 'bold',
     }
 });
+
+export default LoginScreen;

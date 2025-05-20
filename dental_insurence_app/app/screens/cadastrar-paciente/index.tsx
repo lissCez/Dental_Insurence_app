@@ -1,60 +1,138 @@
+import Goback from '@/components/gobackbutton';
+import PatientCard from '@/components/patientCard';
+import { useNavigation } from 'expo-router';
 import React, { useState } from 'react';
-import { Alert, Button, Text, TextInput, View, StyleSheet } from 'react-native';
-import { Link } from 'expo-router';
+import { Button, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 
-const CadastroPacienteScreen = () => {
-    const [nome, setNome] = useState('');
-    const [email, setEmail] = useState('');
-    const [telefone, setTelefone] = useState('');
+interface Patient {
+    id: string;
+    nome: string;
+    sexo: string;
+    naturalidade: string;
+    localNascimento: string;
+    dataNascimento: string;
+}
 
-    const handleCadastro = () => {
-        if (!nome || !email) {
-            Alert.alert('Preencha todos os campos!');
-            return;
-        }
-        Alert.alert('Paciente cadastrado com sucesso!');
-        setNome('');
-        setEmail('');
+const Pacientes = () => {
+    const [pacientes, setPacientes] = useState<Patient[]>([]);
+    const [form, setForm] = useState<Omit<Patient, 'id'>>({
+        nome: '',
+        sexo: '',
+        naturalidade: '',
+        localNascimento: '',
+        dataNascimento: '',
+    });
+
+    const handleChange = (field: keyof typeof form, value: string) => {
+        setForm((prev) => ({ ...prev, [field]: value }));
+    };
+
+    const adicionarPaciente = () => {
+        if (!form.nome || !form.sexo) return alert('Preencha os campos obrigatórios');
+        const novoPaciente: Patient = {
+            id: Math.random().toString(),
+            ...form,
+        };
+        setPacientes((prev) => [...prev, novoPaciente]);
+        setForm({
+            nome: '',
+            sexo: '',
+            naturalidade: '',
+            localNascimento: '',
+            dataNascimento: '',
+        });
+    };
+    const deletarPaciente = (id: string) => {
+        setPacientes((prev) => prev.filter((p) => p.id !== id));
+    };
+
+    const navigation = useNavigation();
+
+    const salvar = () => {
+        // lógica de salvar o paciente aqui
+        navigation.goBack(); // volta pra lista
     };
 
     return (
         <View style={{ flex: 1, padding: 20 }}>
-            <Text style={{ fontSize: 20, marginBottom: 10 }}>Cadastro de Paciente</Text>
+            <Text style={styles.pacienteTitle}>Pacientes</Text>
+            <Text style={styles.formLabel}>Novo Paciente</Text>
             <TextInput
-                style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 10, paddingLeft: 10 }}
                 placeholder="Nome"
-                value={nome}
-                onChangeText={setNome}
+                value={form.nome}
+                onChangeText={(text) => handleChange('nome', text)}
+                style={styles.input}
             />
             <TextInput
-                style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 10, paddingLeft: 10 }}
-                placeholder="Email"
-                value={email}
-                onChangeText={setEmail}
+                placeholder="Sexo"
+                value={form.sexo}
+                onChangeText={(text) => handleChange('sexo', text)}
+                style={styles.input}
             />
-            <Button title="Cadastrar" onPress={handleCadastro} />
-
-            <Link href="/screens/home" asChild>
-                <TouchableOpacity style={styles.link}>
-                    <Text style={styles.linkTexto}>⭠ Voltar</Text>
-                </TouchableOpacity>
-            </Link>
+            <TextInput
+                placeholder="Naturalidade"
+                value={form.naturalidade}
+                onChangeText={(text) => handleChange('naturalidade', text)}
+                style={styles.input}
+            />
+            <TextInput
+                placeholder="Local de Nascimento"
+                value={form.localNascimento}
+                onChangeText={(text) => handleChange('localNascimento', text)}
+                style={styles.input}
+            />
+            <TextInput
+                placeholder="Data de Nascimento"
+                value={form.dataNascimento}
+                onChangeText={(text) => handleChange('dataNascimento', text)}
+                style={styles.input}
+            />
+            <Button title="Salvar Paciente" onPress={salvar} />
+            <ScrollView style={{ marginTop: 20 }}>
+                {pacientes.map((paciente) => (
+                    <View key={paciente.id}>
+                        <PatientCard
+                            nome={paciente.nome}
+                            sexo={paciente.sexo}
+                            naturalidade={paciente.naturalidade}
+                            localNascimento={paciente.localNascimento}
+                            dataNascimento={paciente.dataNascimento}
+                        />
+                        <Button title="Excluir" onPress={() => deletarPaciente(paciente.id)} />
+                    </View>
+                ))}
+                <Goback></Goback>
+            </ScrollView>
         </View>
     );
 };
 
-export default CadastroPacienteScreen;
+export default Pacientes;
 
 const styles = StyleSheet.create({
-    link: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-      marginBottom: 12,
-      width: "80%"
+    pacienteTitle: {
+        fontFamily: 'NotoSans_Condensed',
+        fontWeight: '500',
+        fontSize: 24,
+        lineHeight: 29,
+        color: '#0066FF',
+        marginTop: 19,
+        marginBottom: 10,
     },
-    linkTexto: {
-      color: '#03a1fc',
-      fontWeight: '600',
-    }
-  });
+
+    formLabel: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        marginTop: 20,
+        marginBottom: 10,
+    },
+
+    input: {
+        borderWidth: 1,
+        borderColor: '#ccc',
+        padding: 8,
+        borderRadius: 8,
+        marginBottom: 10,
+    },
+});
+
